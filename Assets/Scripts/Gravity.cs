@@ -7,20 +7,27 @@ public class Gravity : MonoBehaviour
     public Rigidbody rb;
     const float G = 0.0006674f;
     public static List<Gravity> otherObjectsList;
-
+    
+ 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //if (otherObjectsList == null)
-        //{
-           // otherObjectsList = new List<Gravity>();
-       // }
-       // otherObjectsList.Add(this);
+        if (otherObjectsList == null) 
+        {
+         otherObjectsList = new List<Gravity>();
+        }
+        otherObjectsList.Add(this);
     }
 
     private void FixedUpdate()
     {
-        
+        foreach (Gravity obj in otherObjectsList)
+        {
+            if (obj != this)
+            {
+                Attract(obj);
+            }
+        }
     }
 
     void Attract(Gravity other)
