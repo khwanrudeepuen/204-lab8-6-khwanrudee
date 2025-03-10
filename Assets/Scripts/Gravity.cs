@@ -32,7 +32,7 @@ public class Gravity : MonoBehaviour
 
     void Attract(Gravity other)
     {
-        Rigidbody rbOther = GetComponent<Rigidbody>();
+        Rigidbody rbOther = other.rb;
 
         Vector3 disrection = rb.position - rbOther.position;
 
@@ -45,5 +45,6 @@ public class Gravity : MonoBehaviour
 
         float forceMagnitude = G * ((rb.mass * rbOther.mass)/ Mathf.Pow(distance, 2));
         Vector3 force = forceMagnitude * disrection.normalized;
+        rbOther.AddForce(force);
     }
 }
